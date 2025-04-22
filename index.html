@@ -235,9 +235,9 @@ for (let i = 0; i < imgData.data.length; i += 4) {
     			}
   		}
 		const yellowRatio = yellowPixelCount / totalPixelCount;
-  		par += "Tube ${i + 1}: ${yellowRatio * 100}% yellow. ";
+  		par += `Tube ${i + 1}: ${yellowRatio * 100}% yellow. `;
  		if (yellowRatio > 0.3) { // threshold: 30% of the region is yellow
-    		par += "Tube ${i + 1} is yellow! ";
+    		par += `Tube ${i + 1} is yellow! `;
   		}
 	}
 	res.innerHTML = par;
