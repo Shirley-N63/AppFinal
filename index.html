@@ -229,8 +229,19 @@ for (let i = 0; i < imgData.data.length; i += 4) {
   		}
 	}
 	res.innerHTML = par;
+canvas.addEventListener("click", function (event) {
+  const rect = canvas.getBoundingClientRect();
+  const x = Math.floor(event.clientX - rect.left);
+  const y = Math.floor(event.clientY - rect.top);
 
+  const pixel = context.getImageData(x, y, 1, 1).data;
+  const [r, g, b, a] = pixel;
+
+  // Display RGB in the message area
+  messageDisplayArea.innerHTML = `RGB at (${x}, ${y}): R=${r}, G=${g}, B=${b}`;
+});
         } // end of img.onload
+
         
         img.src = reader.result;
       } //  end of reader.onload
