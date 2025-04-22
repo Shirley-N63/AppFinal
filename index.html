@@ -179,6 +179,7 @@ const regionHeight = 500;           // canvas height is 500
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE */
     
 const imgData = context.getImageData(0, 0, 600, 500);
+const iData = context.getImageData(0, 0, 600, 500);
 // Get RGB Data from Image
 for (let i = 0; i < imgData.data.length; i += 4) {
     let red = imgData.data[i];
@@ -201,9 +202,9 @@ for (let i = 0; i < imgData.data.length; i += 4) {
  		 for (let j = xStart; j < xStart + width; j++) {
     			for (let k = 0; k < regionHeight; k++) {
       				const index = (k * canvas.width + j) * 4; // RGBA = 4 values per pixel
-      				const r = imgData.data[index];
-      				const g = imgData.data[index + 1];
-      				const b = imgData.data[index + 2];
+      				const r = iData.data[index];
+      				const g = iData.data[index + 1];
+      				const b = iData.data[index + 2];
 					if (isYellow(r, g, b)) {
         					yellowPixelCount++;
      					 }
