@@ -212,7 +212,7 @@ for (let i = 0; i < imgData.data.length; i += 4) {
   		const width = regionWidth;
  		 for (let j = xStart; j < xStart + width; j++) {
     			for (let k = 0; k < regionHeight; k++) {
-      				const index = (y * canvas.width + x) * 4; // RGBA = 4 values per pixel
+      				const index = (k * canvas.width + j) * 4; // RGBA = 4 values per pixel
       				const r = imageData.data[index];
       				const g = imageData.data[index + 1];
       				const b = imageData.data[index + 2];
