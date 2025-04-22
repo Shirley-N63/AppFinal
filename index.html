@@ -213,9 +213,9 @@ for (let i = 0; i < imgData.data.length; i += 4) {
  		 for (let j = xStart; j < xStart + width; j++) {
     			for (let k = 0; k < regionHeight; k++) {
       				const index = (k * canvas.width + j) * 4; // RGBA = 4 values per pixel
-      				const r = imageData.data[index];
-      				const g = imageData.data[index + 1];
-      				const b = imageData.data[index + 2];
+      				const r = imgData.data[index];
+      				const g = imgData.data[index + 1];
+      				const b = imgData.data[index + 2];
 					if (isYellow(r, g, b)) {
         					yellowPixelCount++;
      					 }
