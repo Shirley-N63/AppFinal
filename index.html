@@ -36,41 +36,85 @@ No known Issues
 -->
 
  <!--START OF DESIGN CODE (DON'T CHANGE FOR THIS APP)-->
- <head>
+<head>
   <meta charset="utf-8">
   <title>Photo Transform</title>
-  <meta name="viewport" content="width=device-width, initial-scale=.7">
+  <meta name="viewport" content="width=device-width, initial-scale=0.7">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+  
+  <!-- Fonts and CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+  
+  <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #ffea89; /* light yellow for soft warmth */
+      background-color: #ffea89; /* Light yellow */
       color: #333;
       margin: 0;
       padding: 20px;
     }
 
     h1, h2 {
-      color: #ffea89; /* golden yellow */
+      color: #facc15;
       text-align: center;
     }
 
-    input[type="file"] {
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px;
+    .ui-header, .ui-footer {
+      background-color: #facc15 !important;
+      color: white !important;
+      font-weight: bold;
+      text-align: center;
       padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #fcd34d;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .ui-content {
+      padding: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      color: black;
+      font-size: 1.5em;
+      margin-bottom: 30px;
+    }
+
+    .file-upload-container {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* Hide default jQuery Mobile file input */
+    .ui-btn.ui-input-btn {
+      display: none !important;
+    }
+
+    input[type="file"] {
+      display: none; /* Hide the raw input to use a styled label/button */
+    }
+
+    .cute-upload-button {
+      display: inline-block;
+      padding: 12px 24px;
       background-color: #ffea89;
-      color: #444;
+      color: #000000;
+      font-size: 16px;
+      font-weight: 600;
+      border: 2px dashed #facc15;
+      border-radius: 12px;
       cursor: pointer;
-      display: block;
-      margin: 0 auto;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .cute-upload-button:hover {
+      background-color: #fcd34d;
+      transform: scale(1.05);
     }
 
     #messageDisplayArea {
@@ -85,41 +129,8 @@ No known Issues
       box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
       border-radius: 8px;
     }
-
-    .ui-header, .ui-footer {
-      background-color: #ffea89 !important;
-      color: white !important;
-      font-weight: bold;
-      text-align: center;
-      padding: 10px;
-    }
-    .file-upload-container {
-  text-align: center;
-  margin-top: 10px;
-}
-
-input[type="file"] {
-  display: none; /* Hide default input */
-}
-
-.cute-upload-button {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #ffea89;
-  color: #000000;
-  font-size: 16px;
-  font-weight: 600;
-  border: 2px dashed #facc15;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.cute-upload-button:hover {
-  background-color: #fcd34d;
-  transform: scale(1.05);
-}
   </style>
+</head>
 	 
  <script>
   var docMod = document.lastModified; // gets last modified date and time of the index.html file
@@ -268,9 +279,9 @@ canvas.addEventListener("click", function (event) {
       <h2>Push the Button to Take a Picture!</h2> <!--MAIN label of text on page, tells user what to do-->
       <div>
         Press the Yellow Button to Create or Choose Image File: <!--SUBHEADING on page -->
-        <div class="file-upload-container">
-  <label for="fileInput" class="cute-upload-button">Choose an Image</label>
-  <input type="file" id="fileInput">
+<div class="file-upload-container">
+  <label for="fileInput" class="cute-upload-button">Take a Picture</label>
+  <input type="file" id="fileInput" accept="image/*" capture="environment">
 </div>
       </div>
       <div id="messageDisplayArea"></div>
