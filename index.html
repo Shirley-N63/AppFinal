@@ -156,7 +156,12 @@ input[type="file"] {
   var vertSquashRatio = detectVerticalSquash(img);
   ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
  }
-
+function isYellow(r,g,b){
+	return (r > 190 && g > 190 && b < 60); //190,190,60 is the base for what we consider yellow here
+} //isYellow function examines rgb values for a pixel and returns boolean value - true = yellow
+const numTubes = 8; // image has 8 tubes
+const regionWidth = 600 / numTubes; // canvas width is 600
+const regionHeight = 500;           // canvas height is 500
 /* window.onload necessary to keep javascripts from running before the app gets a chance to load entirely. */
  window.onload = function() {
   var fileInput = document.getElementById('fileInput');
@@ -199,6 +204,32 @@ for (let i = 0; i < imgData.data.length; i += 4) {
 }
 
         context2.putImageData(imgData, 0, 0); //this tells the app to add the "yellow image" onto the SECOND canvas with "context.2"
+	var par = "";
+	for (let i = 0; i < numTubes; i++) { //for each tube this loop gathers what % of the region is yellow
+  		let yellowPixelCount = 0;
+  		let totalPixelCount = 0;
+		const xStart = i * regionWidth;
+  		const width = regionWidth;
+ 		 for (let j = xStart; j < xStart + width; j++) {
+    			for (let k = 0; k < regionHeight; k++) {
+      				const index = (y * canvas.width + x) * 4; // RGBA = 4 values per pixel
+      				const r = imageData.data[index];
+      				const g = imageData.data[index + 1];
+      				const b = imageData.data[index + 2];
+					if (isYellow(r, g, b)) {
+        					yellowPixelCount++;
+     					 }
+      				totalPixelCount++;
+    			}
+  		}
+		const yellowRatio = yellowPixelCount / totalPixelCount;
+  		par += "Tube ${i + 1}: ${yellowRatio * 100}% yellow. ";
+ 		if (yellowRatio > 0.3) { // threshold: 30% of the region is yellow
+    		par += "Tube ${i + 1} is yellow! ";
+  		}
+	}
+	res.innerHTML = par;
+
         } // end of img.onload
         
         img.src = reader.result;
@@ -254,6 +285,7 @@ for (let i = 0; i < imgData.data.length; i += 4) {
      		context2.fillText("Yellow-Intensified Image", 10, 20); 
      	</script>
      <!--END of SECOND canvas-->
+	<p id="results"></p>
 <!--END OF APP BODY -->
      
     </div><!-- /content -->
